@@ -3,7 +3,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./style/style.css">
     <title>MIK - Home</title>
 </head>
 <body class="layer1">
@@ -34,9 +34,10 @@
         <div class="dropdown-content-under">
             <a href="#Lexer:line3-20">Global definitions: Line 3-20</a>
             <a href="#Lexer:class_Token">Token class</a>
-            <a href="#Lexer:__init__">Lexer class __init__</a>
-            <a href="#Lexer:make_tokens()">Main method: make_tokens</a>
-            <a href="#Lexer:__advance()">__advance method</a>
+            <a href="#Lexer:__init__">Lexer class __init__()</a>
+            <a href="#Lexer:make_tokens()">Main method: make_tokens()</a>
+            <a href="#Lexer:__advance()">__advance() method</a>
+            <a href="#Lexer:__get_id()">__get_id() method</a>
         </div>
       </div>
     <div class="article-doc" id="Lexer:line3-20">
@@ -78,11 +79,11 @@ class Token:
         return f"{self.type_}:{self.value}"
             </pre>
         </blockquote>
-        <p>The class Token is a complex datatype. It gets initialized with a type and a value (types are the <a href="#Lexer:line3-20">🔗TT_... vars</a> shown above). It is used to tokenize every character. It also has a __repr__ method that prints the type:value if it's called via. print(token1).</p>
+        <p>The class Token is a complex datatype. It gets initialized with a type and a value (types are the <a href="#Lexer:line3-20" target="_blank">🔗TT_... vars</a> shown above). It is used to tokenize every character. It also has a __repr__ method that prints the type:value if it's called via. print(token1).</p>
     </div>
-    <h2 id="Lexer:class_Lexer" style="padding-top: 2rem; padding-bottom: 0.5rem;">☞ class Lexer</h2>
-    <div class="article-doc" id="Lexer:__init__">
-        <h2>__init__</h2>
+    <h2 id="Lexer:class_Lexer" style="padding-top: 2rem; padding-bottom: 0.5rem;">☞ Class Lexer</h2>
+    <div class="article-doc" id="Lexer:__init__()">
+        <h2>__init__()</h2>
         <blockquote>
             <pre>
 def __init__(self, text):
@@ -95,12 +96,12 @@ def __init__(self, text):
         <p>
             The class Lexer gets initialized with only raw Text to lex it than sets the position to -1. 
             The position is very important as it is used to set the current character in 
-            <a href="#Lexer:__advance()">🔗__advance()</a>. After that the variable for the current character
-             is initialized with None. Then it <a href="#Lexer:__advance()">🔗advances</a> once to set the Current character.
+            <a href="#Lexer:__advance()" target="_blank">🔗__advance()</a>. After that the variable for the current character
+             is initialized with None. Then it <a href="#Lexer:__advance()" target="_blank">🔗advances</a> once to set the Current character.
         </p>
     </div>
     <div class="article-doc" id="Lexer:make_tokens()">
-        <h2>make_tokens</h2>
+        <h2>make_tokens()</h2>
         <blockquote>
             <pre>
 def make_tokens(self):
@@ -108,13 +109,13 @@ def make_tokens(self):
 
     while self.current_char != None:
         if self.current_char in " \t":
-            self.__advance()
+            self.<a href="#Lexer:__advance()" id="a-in-code" target="_blank">__advance()</a>
 
         elif self.current_char in DIGITS:
-            tokens.append(self.__get_id())
+            tokens.append(self.<a href="#Lexer:__get_id()" id="a-in-code" target="_blank">__get_id()</a>)
 
         elif self.current_char in NUMBERS:
-            tokens.append(self.__get_number())
+            tokens.append(self.<a href="#Lexer:__get_number()" id="a-in-code" target="_blank">__get_number()</a>)
 
         elif self.current_char == "+":
             tokens.append(Token(TT_PLUS))
@@ -165,11 +166,14 @@ def make_tokens(self):
             </pre>
         </blockquote>
         <p>
-            First a empty list for the future tokens is initialized. Then we enter a while loop that runs as long as <a href="#Lexer:__advance()">🔗__advance</a> finds another char to tokenize. With the first if statement we ignore whitespaces and tabs because they don't matter in MIK. 
+            First a empty list for the future tokens is initialized. Then we enter a while loop that runs as long as <a href="#Lexer:__advance()" target="_blank">🔗__advance</a> finds another char to tokenize. With the first if statement we ignore whitespaces and tabs as they don't matter in MIK. 
+            In the next if or rather elif we Look if the current character is in <a href="#Lexer:line3-20" target="_blank">🔗DIGITS</a> and if this is the case we use <a href="#" target="_blank">🔗__get_id</a> to get a whole string which then is tokenized with an <a href="Lexer:line3-20" target="_blank">🔗ID</a> token. This trend
+             continues with the other elif statements. At the end of each statement we need to <a href="Lexer:__advance()" target="_blank">🔗__advance</a> to check the same stuff for the next char until we reach the end of file and the current character is None in which case we break and return the
+              list of tokens and an error which in this case (succes) is None. In case we encounter a character we can't tokenize we return an empty token list and a Exception for the error.
         </p>
     </div>
     <div class="article-doc" id="Lexer:__advance()">
-        <h2>__advance</h2>
+        <h2>__advance()</h2>
         <blockquote>
             <pre>
 def __advance(self):
@@ -177,36 +181,49 @@ def __advance(self):
     self.current_char = self.text[self.pos] if self.pos &lt; len(self.text) else None
             </pre>
         </blockquote>
+        <p>
+            The __advance method is key to the succes of this program. It sets the current
+             character to the next character in the code it lexes. It does this by first incrementing
+              the position by one. 'Why first?', I hear you ask. Thats due to the fact that we start
+               at the index -1 and with the current character set to None, and, as you may know, 
+               the 0 character is the first element of a list or string. This is why we start with 
+               incrementing (for more info see: <a href="#Lexer:__init__()" target="_blank">🔗__init__</a>).
+        </p>
+    </div>
+    <div class="article-doc" id="Lexer:__get_id()">
+        <h2>__get_id()</h2>
+        <blockquote>
+            <pre>
+def __get_id(self):
+    id_str = ""
+
+    while self.current_char != None and self.current_char in <a href="#Lexer:line3-20" target="_blank" id="a-in-code">DIGITS</a>:
+        id_str += self.current_char
+        self.<a href="#Lexer:__advance()" id="a-in-code" target="_blank">__advance()</a>
+
+    return <a href="#Lexer:class_Token" target="_blank" id="a-in-code">Token</a>(TT_ID, str(id_str))
+            </pre>
+        </blockquote>
+        <p>
+            First we initialize a empty string. After that we enter a while loop that says we will append the next characters to the initialized string as long as the current character isn't the end of file and the current character is a <a href="#Lexer:line3-20" target="_blank">🔗DIGIT</a>. At the end we return the string with the token ID.
+        </p>
     </div>
 
 
 
-    <h1 id="Parser">◉Parser</h1>
+    <div class="dropdown-under" id="Parser">
+        <button class="dropbtn-under"><h1>◉Parser</h1></button>
+        <div class="dropdown-content-under">
+            <a href="#">N/A</a>
+        </div>
+    </div>
+
+    <h2>N/A</h2>
 
 
     <footer>
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
-        <script>
-            //Get the button:
-            mybutton = document.getElementById("myBtn");
-
-            // When the user scrolls down 20px from the top of the document, show the button
-            window.onscroll = function() {scrollFunction()};
-
-            function scrollFunction() {
-            if (document.body.scrollTop > 109 || document.documentElement.scrollTop > 109) {
-                mybutton.style.display = "block";
-            } else {
-                mybutton.style.display = "none";
-            }
-            }
-
-            // When the user clicks on the button, scroll to the top of the document
-            function topFunction() {
-            document.body.scrollTop = 0; // For Safari
-            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
-            }
-        </script>
+        <script src="./scripts/to_top.js"></script>
     </footer>
 </body>
 </html>

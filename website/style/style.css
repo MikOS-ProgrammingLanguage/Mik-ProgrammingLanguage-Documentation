@@ -206,3 +206,11 @@ blockquote {
   #myBtn:hover {
     background-color: #555; /* Add a dark-grey background on hover */
   }
+
+p {
+    letter-spacing: 0.5px;
+}
+
+#a-in-code {
+    color: blueviolet;
+}
