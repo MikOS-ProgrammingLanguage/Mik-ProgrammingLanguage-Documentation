@@ -2,4 +2,4 @@
 A documentation website of MIK
 
 # Website URL🔗
-https://mikos-programminglanguage.github.io/Mik-ProgrammingLanguage-Documentation/
+https://mikpl.gq/
