@@ -1,0 +1,212 @@
+<html lang="en" style="background-color: #12232e;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>MIK - Home</title>
+</head>
+<body class="layer1">
+    <header>
+        <div class="nav">
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li class="active"><a href="#">Documentation</a></li>
+                <li><a href="#">Download</a></li>
+                <li><a href="#">Contact</a></li>
+                <li>
+                    <div class="dropdown">
+                    <button class="dropbtn">▶︎Sections◀︎</button>
+                    <div class="dropdown-content">
+                        <a href="#Lexer">Lexer</a>
+                        <a href="#Parser">Parser</a>
+                        <a href="#">Maker</a>
+                        <a href="#">Compiler</a>
+                    </div>
+                  </div>
+                </li>
+            </ul>
+        </div>
+        <h2 class="home-btn"><a href="../index.html">MIK</a></h2>
+    </header>
+    <div class="dropdown-under" id="Lexer">
+        <button class="dropbtn-under"><h1>◉Lexer</h1></button>
+        <div class="dropdown-content-under">
+            <a href="#Lexer:line3-20">Global definitions: Line 3-20</a>
+            <a href="#Lexer:class_Token">Token class</a>
+            <a href="#Lexer:__init__">Lexer class __init__</a>
+            <a href="#Lexer:make_tokens()">Main method: make_tokens</a>
+            <a href="#Lexer:__advance()">__advance method</a>
+        </div>
+      </div>
+    <div class="article-doc" id="Lexer:line3-20">
+        <h2>Line 3-20</h2>
+        <blockquote>
+            <pre>
+DIGITS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
+NUMBERS = "0123456789"
+OPS = "=|&:'\""
+
+TT_OP = "OP"    # Done
+TT_ID = "ID"    # Done
+TT_INT = "INT"    # Done
+TT_FLOAT = "FLOAT"    # Done
+TT_PLUS = "PLUS"    # Done
+TT_MINUS = "MINUS"    # Done
+TT_MUL = "MUL"    # Done
+TT_DIV = "DIV"    # Done
+TT_POW = "POW"    # Done
+TT_LPAREN = "LPAREN"    # Done
+TT_RPAREN = "RPAREN"    # Done
+TT_NEWLN = "NEWLN"    # Done
+TT_LCURL = "LCURL"    # Done
+TT_RCURL = "RCURL"    # Done
+            </pre>
+        </blockquote>
+        <p>Holds a string of digits, a string of numbers, a string of operators and different token types (TT).<br><br>
+        The token types are needed to leter on identify what a certain character or string is.</p>
+    </div>
+    <div class="article-doc" id="Lexer:class_Token">
+        <h2>class Token</h2>
+        <blockquote>
+            <pre>
+class Token:
+    def __init__(self, type_, value=None):
+        self.type_ = type_
+        self.value = value
+        def __repr__(self):
+        return f"{self.type_}:{self.value}"
+            </pre>
+        </blockquote>
+        <p>The class Token is a complex datatype. It gets initialized with a type and a value (types are the <a href="#Lexer:line3-20">🔗TT_... vars</a> shown above). It is used to tokenize every character. It also has a __repr__ method that prints the type:value if it's called via. print(token1).</p>
+    </div>
+    <h2 id="Lexer:class_Lexer" style="padding-top: 2rem; padding-bottom: 0.5rem;">☞ class Lexer</h2>
+    <div class="article-doc" id="Lexer:__init__">
+        <h2>__init__</h2>
+        <blockquote>
+            <pre>
+def __init__(self, text):
+    self.text = text
+    self.pos = -1
+    self.current_char = None
+    self.__advance()
+            </pre>
+        </blockquote>
+        <p>
+            The class Lexer gets initialized with only raw Text to lex it than sets the position to -1. 
+            The position is very important as it is used to set the current character in 
+            <a href="#Lexer:__advance()">🔗__advance()</a>. After that the variable for the current character
+             is initialized with None. Then it <a href="#Lexer:__advance()">🔗advances</a> once to set the Current character.
+        </p>
+    </div>
+    <div class="article-doc" id="Lexer:make_tokens()">
+        <h2>make_tokens</h2>
+        <blockquote>
+            <pre>
+def make_tokens(self):
+    tokens = []
+
+    while self.current_char != None:
+        if self.current_char in " \t":
+            self.__advance()
+
+        elif self.current_char in DIGITS:
+            tokens.append(self.__get_id())
+
+        elif self.current_char in NUMBERS:
+            tokens.append(self.__get_number())
+
+        elif self.current_char == "+":
+            tokens.append(Token(TT_PLUS))
+            self.__advance()
+
+        elif self.current_char == "-":
+            tokens.append(Token(TT_MINUS))
+            self.__advance()
+
+        elif self.current_char == "*":
+            tokens.append(Token(TT_MUL))
+            self.__advance()
+
+        elif self.current_char == "/":
+            tokens.append(Token(TT_DIV))
+            self.__advance()
+
+        elif self.current_char == "^":
+            tokens.append(Token(TT_POW))
+            self.__advance()
+
+        elif self.current_char == "(":
+            tokens.append(Token(TT_LPAREN))
+            self.__advance()
+
+        elif self.current_char == ")":
+            tokens.append(Token(TT_RPAREN))
+            self.__advance()
+
+        elif self.current_char == "\n":
+            tokens.append(Token(TT_NEWLN))
+            self.__advance()
+
+        elif self.current_char == "{":
+            tokens.append(Token(TT_LCURL))
+            self.__advance()
+
+        elif self.current_char == "}":
+            tokens.append(Token(TT_RCURL))
+            self.__advance()
+
+        elif self.current_char in OPS:
+            tokens.append(self.__get_operand())
+
+        else:
+            return [], Exception(f"IllegalCharError: {self.current_char}:{self.pos}")
+    return tokens, None
+            </pre>
+        </blockquote>
+        <p>
+            First a empty list for the future tokens is initialized. Then we enter a while loop that runs as long as <a href="#Lexer:__advance()">🔗__advance</a> finds another char to tokenize. With the first if statement we ignore whitespaces and tabs because they don't matter in MIK. 
+        </p>
+    </div>
+    <div class="article-doc" id="Lexer:__advance()">
+        <h2>__advance</h2>
+        <blockquote>
+            <pre>
+def __advance(self):
+    self.pos += 1
+    self.current_char = self.text[self.pos] if self.pos &lt; len(self.text) else None
+            </pre>
+        </blockquote>
+    </div>
+
+
+
+    <h1 id="Parser">◉Parser</h1>
+
+
+    <footer>
+        <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+        <script>
+            //Get the button:
+            mybutton = document.getElementById("myBtn");
+
+            // When the user scrolls down 20px from the top of the document, show the button
+            window.onscroll = function() {scrollFunction()};
+
+            function scrollFunction() {
+            if (document.body.scrollTop > 109 || document.documentElement.scrollTop > 109) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+            }
+
+            // When the user clicks on the button, scroll to the top of the document
+            function topFunction() {
+            document.body.scrollTop = 0; // For Safari
+            document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+            }
+        </script>
+    </footer>
+</body>
+</html>
