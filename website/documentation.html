@@ -4,7 +4,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style/style.css">
-    <title>MIK - Home</title>
+    <title>MIK - Documentation</title>
 </head>
 <body class="layer1">
     <header>
@@ -168,7 +168,7 @@ def make_tokens(self):
             self.__advance()
 
         elif self.current_char in OPS:
-            tokens.append(self.__get_operand())
+            tokens.append(self.<a href="#__get_operand()" id="a-in-code">__get_operand())</a>
 
         else:
             return [], Exception(f"IllegalCharError: {self.current_char}:{self.pos}")
@@ -215,8 +215,38 @@ def __get_id(self):
             </pre>
         </blockquote>
         <p>
-            First we initialize a empty string. After that we enter a while loop that says we will append the next characters to the initialized string as long as the current character isn't the end of file and the current character is a <a href="#Lexer:line3-20" target="_blank">🔗DIGIT</a>. At the end we return the string with the token ID.
+            First a empty string is initialized. After that a while loop is entered that appends the next characters to the initialized string as long as the current character isn't the end of file and the current character is a <a href="#Lexer:line3-20" target="_blank">🔗DIGIT</a>. At the end we return the string with the token ID.
         </p>
+    </div>
+    <div class="article-doc" id="Lexer:__get_number()">
+        <h2>__get_number()</h2>
+        <blockquote>
+            <pre>
+def __get_number(self):
+    num_str = ""
+    dot_count = 0
+
+    while self.current_char != None and self.current_char in <a href="#Lexer:line3-20" id="a-in-code">NUMBERS</a> + ".":
+        if self.current_char == ".":
+            if dot_count == 1: break
+            dot_count += 1
+            num_str += "."
+        else:
+            num_str += self.current_char
+        self.<a href="#Lexer:__advance()" id="a-in-code">__advance()</a>
+
+    if dot_count:
+        return Token(TT_FLOAT, float(num_str))
+    else:
+        return Token(TT_INT, int(num_str))
+            </pre>
+        </blockquote>
+        <p>First, a number_str is initialized kind of like in <a href="Lexer:__get_id()">🔗__get_id()</a>.
+        After that a dot_count is initialized. This is important to differanciate between ints and floats. 
+        Then a while loop is entered that goes until a character is none or if the current character isn't 
+        in <a href="#Lexer:line3-20">🔗NUMBERS</a> + a dot. If there is a dot the dot_count gets incremented 
+        by one. If the dot_count is larger than 1 we break because a float can't have more than one dot. After 
+        that we just append the current character. At the end a float is returned if there was a dot. And a int if there wasn't.</p>
     </div>
 
 
@@ -234,7 +264,7 @@ def __get_id(self):
     <footer>
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
         <script src="./scripts/to_top.js"></script>
-        <p style="font-size: smaller;">©Moritz Schittenhekm</p>
+        <p style="font-size: smaller;">©Moritz Schittenhelm</p>
     </footer>
 </body>
 </html>
