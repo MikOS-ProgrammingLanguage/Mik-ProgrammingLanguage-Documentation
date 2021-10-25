@@ -14,12 +14,13 @@
                 <li class="active"><a href="#">Documentation</a></li>
                 <li>
                     <div class="dropdown">
-                        <button class="dropbtn">Contact</button>
+                        <button class="dropbtn"><li>Contact</li></button>
                         <div class="dropdown-content">
                             <a href="https://github.com/MikOS-ProgrammingLanguage/Mik-ProgrammingLanguage" target="_blank"><img src="./style/imgs/iconmonstr-github-3-240.png" width="20" height="20"> Github</a>
                             <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-youtube-8-240.png" width="20" height="20"> Youtube</a>
                             <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-discord-3-240.png" width="20" height="20"> Discord</a>
                             <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-twitter-3-240.png" width="20" height="20"> Twitter</a>
+			    <a href="#" target="_blank">☞Portfolio</a>
                         </div>
                       </div>
                 </li>
@@ -48,6 +49,7 @@
             <a href="#Lexer:make_tokens()">Main method: make_tokens()</a>
             <a href="#Lexer:__advance()">__advance() method</a>
             <a href="#Lexer:__get_id()">__get_id() method</a>
+            <a href="Lexer:__get_operand()">__get_operand() method</a>
         </div>
       </div>
     <div class="article-doc" id="Lexer:line3-20">
@@ -248,17 +250,59 @@ def __get_number(self):
         by one. If the dot_count is larger than 1 we break because a float can't have more than one dot. After 
         that we just append the current character. At the end a float is returned if there was a dot. And a int if there wasn't.</p>
     </div>
+    <div class="article-doc" id="Lexer:__get_operand()">
+        <h2>__get_operand()</h2>
+        <blockquote>
+            <pre>
+def __get_operand(self):
+    op_str = ""
+
+    while self.current_char != None and self.current_char in OPS:
+        op_str += self.current_char
+        self.__advance()
+
+    return Token(TT_OP, op_str)
+            </pre>
+        </blockquote>
+        <p>
+            In the __get_operand() method we basically look for something like '++' or '--' or '==', 
+            etc... You get the point. this is done by appending each character that is a operand to 
+            a string as long as this character is a operand. at the end the function returns a 
+            <a href="Lexer:class_Token" target="_blank">🔗Token</a>.
+        </p>
+    </div>
 
 
 
     <div class="dropdown-under" id="Parser">
         <button class="dropbtn-under"><h1>◉Parser</h1></button>
         <div class="dropdown-content-under">
-            <a href="#">N/A</a>
+            <a href="#Parser:imports">Imports</a>
+            <a href="#Parser:instruction_set">Instruction set</a>
         </div>
     </div>
 
-    <h2>N/A</h2>
+    <div class="article-doc" id="Parser:imports">
+        <h2>Imports</h2>
+        <blockquote>
+            <pre>
+                from lexer import Token
+            </pre>
+        </blockquote>
+        <p>
+            Here the <a href="#Lexer:class_Token" target="_blank">🔗Token</a> class is imported from 
+            the <a href="#Lexer" target="_blank">◉Lexer</a>. It's not necesarry but it helps with code 
+            completion to have the class defined.
+        </p>
+    </div>
+    <div class="article-doc" id="Parser:instruction_set">
+        <h2>Instruction set</h2>
+        <blockquote>
+            <pre>
+                code should go here later, but I'm tired af.
+            </pre>
+        </blockquote>
+    </div>
 
 
     <footer>
