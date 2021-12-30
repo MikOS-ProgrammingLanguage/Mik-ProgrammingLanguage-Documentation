@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en" style="background-color: #12232e;">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./style/style.css">
+    <title>MIK - Home</title>
+</head>
+    <body>
+        <header class="spacer">
+            <div class="nav">
+                <input type="checkbox">
+                <span></span>
+                <span></span>
+                <div class="menu">
+                    <li><a href="../index.html">home</a></li>
+                    <li><a id="active" href="#">about</a></li>
+                    <li><a href="./documentation.html">documentation</a></li>
+                    <li><a href="./Download.html">download</a></li>
+                    <li><a href="#">blog</a></li>
+                    <li><a href="#">contact</a></li>
+                </div>
+            </div>
+        </header>
+        
+        <!--Articles about mik origin-->
+        <div class="article">
+            <h1>The MIK programming language</h1>
+
+            <!--what is that-->
+            <div class="article-doc">
+                <h2 class="function">mik.what.is()</h2>
+                <p>The MIK project is OS/Compiler. It was started in Oktober 2021.
+                    The MIK programming language, on which this site about,
+                     is a open source compiler started as a joke. There were only 3 requirenments:
+                </p>
+                <ol>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">Work.</il>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">Be good enough to build a OS with it.</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">Be and remain open source.<sup>1</sup></li>
+                </ol>
+                <p style="font-size: smaller;">1: <a style="font-family: 'JetBrains Mono', monospace;" href="https://github.com/MikOS-ProgrammingLanguage/mic">🔗 Github repository</a></p>
+            </div>
+
+            <!--what goals-->
+            <div class="article-doc">
+                <h2 class="function">mik.what.goals()</h2>
+                <p>The main goal of MIK currently is and allways will be versatile. That includes:</p>
+
+                <h2 class="function">mik.customizable.syntax()</h2>
+                <p>We plan on implementing a config file, in which you can specify the syntax of MIK. You will be able to customize the following keywords:</p>
+                <ul>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">mikf  (function keyword)</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">mikas (assembly function keyword)</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">struct</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">estruct</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">any types that the language currenyl has. (int, int8, int16, int32, int64, uint8, uint16, uint32, uint64, float, cock, str, char)</li>
+                    <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">return</li>
+                </ul>
+
+                <p>For example here are two functions that add two numbers.</p>
+                <p>Default MIK</p>
+                <blockquote>
+                    <pre>
+@section("add function")                        
+mikf add(int a, int b) -> {
+    return a + b
+}
+@secend
+                    </pre>
+                </blockquote>
+                <p>Custom MIK</p>
+                <blockquote>
+                    <pre>
+@section("add function")
+func add(int_type a, int_type b) -> int_type {
+    return_keyword a + b
+}
+@secend
+                    </pre>
+                </blockquote>
+
+                <h2 class="function">mik.compiling.targets()</h2>
+                <p>Our goal is to have as many compiling targets for MIK as possible. As of now we only have c, but assembly as well as webassembly.</p>
+            </div>
+        </div>
+    </body>
+</html>

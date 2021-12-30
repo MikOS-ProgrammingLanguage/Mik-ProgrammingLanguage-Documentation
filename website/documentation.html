@@ -9,26 +9,20 @@
 <body class="layer1">
     <header>
         <div class="nav">
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li class="active"><a href="#">Documentation</a></li>
-                <li>
-                    <div class="dropdown">
-                        <button class="dropbtn"><li>Contact</li></button>
-                        <div class="dropdown-content">
-                            <a href="https://github.com/MikOS-ProgrammingLanguage/Mik-ProgrammingLanguage" target="_blank"><img src="./style/imgs/iconmonstr-github-3-240.png" width="20" height="20"> Github</a>
-                            <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-youtube-8-240.png" width="20" height="20"> Youtube</a>
-                            <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-discord-3-240.png" width="20" height="20"> Discord</a>
-                            <a href="#" target="_blank"><img src="./style/imgs/iconmonstr-twitter-3-240.png" width="20" height="20"> Twitter</a>
-			    <a href="#" target="_blank">☞Portfolio</a>
-                        </div>
-                      </div>
-                </li>
-                <li><a href="#">Download</a></li>
-            </ul>
-        </div>
-        <h2 class="home-btn"><a href="../index.html">MIK</a></h2>
+            <input type="checkbox">
+              <span></span>
+              <span></span>
+              <div class="menu">
+                <li><a href="../index.html">home</a></li>
+                <li><a href="./about.html">about</a></li>
+                <li><a id="active">documentation</a></li>
+                <li><a href="./Download.html">download</a></li>
+                <li><a href="#">blog</a></li>
+                <li><a href="#">contact</a></li>
+              </div>
+          </div>
     </header>
+    <!-- Needs to be redone -->
     <div class="dropdown" style="display: block; padding-top: 1rem; background-color: #12232e;">
         <button class="dropbtn" style="background-color: #12232e;">▶︎Sections◀︎</button>
         <div class="dropdown-content">
@@ -58,257 +52,13 @@
         </div>
       </div>
     <div class="article-doc" id="Lexer:line3-20">
-        <h2>Line 3-20</h2>
+        <h2 class="function">mic.lexer()</h2>
         <blockquote>
             <pre>
-DIGITS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_"
-NUMBERS = "0123456789"
-OPS = "=|&:'\""
-
-TT_OP = "OP"    # Done
-TT_ID = "ID"    # Done
-TT_INT = "INT"    # Done
-TT_FLOAT = "FLOAT"    # Done
-TT_PLUS = "PLUS"    # Done
-TT_MINUS = "MINUS"    # Done
-TT_MUL = "MUL"    # Done
-TT_DIV = "DIV"    # Done
-TT_POW = "POW"    # Done
-TT_LPAREN = "LPAREN"    # Done
-TT_RPAREN = "RPAREN"    # Done
-TT_NEWLN = "NEWLN"    # Done
-TT_LCURL = "LCURL"    # Done
-TT_RCURL = "RCURL"    # Done
             </pre>
         </blockquote>
-        <p>Holds a string of digits, a string of numbers, a string of operators and different token types (TT).<br><br>
-        The token types are needed to leter on identify what a certain character or string is.</p>
+        <p>Needs to be done later (redone)</p>
     </div>
-    <div class="article-doc" id="Lexer:class_Token">
-        <h2>class Token</h2>
-        <blockquote>
-            <pre>
-class Token:
-    def __init__(self, type_, value=None):
-        self.type_ = type_
-        self.value = value
-        def __repr__(self):
-        return f"{self.type_}:{self.value}"
-            </pre>
-        </blockquote>
-        <p>The class Token is a complex datatype. It gets initialized with a type and a value (types are the <a href="#Lexer:line3-20" target="_blank">🔗TT_... vars</a> shown above). It is used to tokenize every character. It also has a __repr__ method that prints the type:value if it's called via. print(token1).</p>
-    </div>
-    <h2 id="Lexer:class_Lexer" style="padding-top: 2rem; padding-bottom: 0.5rem; margin-left: 3rem;">☞ Class Lexer</h2>
-    <div class="article-doc" id="Lexer:__init__()">
-        <h2>__init__()</h2>
-        <blockquote>
-            <pre>
-def __init__(self, text):
-    self.text = text
-    self.pos = -1
-    self.current_char = None
-    self.__advance()
-            </pre>
-        </blockquote>
-        <p>
-            The class Lexer gets initialized with only raw Text to lex it than sets the position to -1. 
-            The position is very important as it is used to set the current character in 
-            <a href="#Lexer:__advance()" target="_blank">🔗__advance()</a>. After that the variable for the current character
-             is initialized with None. Then it <a href="#Lexer:__advance()" target="_blank">🔗advances</a> once to set the Current character.
-        </p>
-    </div>
-    <div class="article-doc" id="Lexer:make_tokens()">
-        <h2>make_tokens()</h2>
-        <blockquote>
-            <pre>
-def make_tokens(self):
-    tokens = []
-
-    while self.current_char != None:
-        if self.current_char in " \t":
-            self.<a href="#Lexer:__advance()" id="a-in-code" target="_blank">__advance()</a>
-
-        elif self.current_char in DIGITS:
-            tokens.append(self.<a href="#Lexer:__get_id()" id="a-in-code" target="_blank">__get_id()</a>)
-
-        elif self.current_char in NUMBERS:
-            tokens.append(self.<a href="#Lexer:__get_number()" id="a-in-code" target="_blank">__get_number()</a>)
-
-        elif self.current_char == "+":
-            tokens.append(Token(TT_PLUS))
-            self.__advance()
-
-        elif self.current_char == "-":
-            tokens.append(Token(TT_MINUS))
-            self.__advance()
-
-        elif self.current_char == "*":
-            tokens.append(Token(TT_MUL))
-            self.__advance()
-
-        elif self.current_char == "/":
-            tokens.append(Token(TT_DIV))
-            self.__advance()
-
-        elif self.current_char == "^":
-            tokens.append(Token(TT_POW))
-            self.__advance()
-
-        elif self.current_char == "(":
-            tokens.append(Token(TT_LPAREN))
-            self.__advance()
-
-        elif self.current_char == ")":
-            tokens.append(Token(TT_RPAREN))
-            self.__advance()
-
-        elif self.current_char == "\n":
-            tokens.append(Token(TT_NEWLN))
-            self.__advance()
-
-        elif self.current_char == "{":
-            tokens.append(Token(TT_LCURL))
-            self.__advance()
-
-        elif self.current_char == "}":
-            tokens.append(Token(TT_RCURL))
-            self.__advance()
-
-        elif self.current_char in OPS:
-            tokens.append(self.<a href="#__get_operand()" id="a-in-code">__get_operand())</a>
-
-        else:
-            return [], Exception(f"IllegalCharError: {self.current_char}:{self.pos}")
-    return tokens, None
-            </pre>
-        </blockquote>
-        <p>
-            First a empty list for the future tokens is initialized. Then we enter a while loop that runs as long as <a href="#Lexer:__advance()" target="_blank">🔗__advance</a> finds another char to tokenize. With the first if statement we ignore whitespaces and tabs as they don't matter in MIK. 
-            In the next if or rather elif we Look if the current character is in <a href="#Lexer:line3-20" target="_blank">🔗DIGITS</a> and if this is the case we use <a href="#" target="_blank">🔗__get_id</a> to get a whole string which then is tokenized with an <a href="Lexer:line3-20" target="_blank">🔗ID</a> token. This trend
-             continues with the other elif statements. At the end of each statement we need to <a href="Lexer:__advance()" target="_blank">🔗__advance</a> to check the same stuff for the next char until we reach the end of file and the current character is None in which case we break and return the
-              list of tokens and an error which in this case (succes) is None. In case we encounter a character we can't tokenize we return an empty token list and a Exception for the error.
-        </p>
-    </div>
-    <div class="article-doc" id="Lexer:__advance()">
-        <h2>__advance()</h2>
-        <blockquote>
-            <pre>
-def __advance(self):
-    self.pos += 1
-    self.current_char = self.text[self.pos] if self.pos &lt; len(self.text) else None
-            </pre>
-        </blockquote>
-        <p>
-            The __advance method is key to the succes of this program. It sets the current
-             character to the next character in the code it lexes. It does this by first incrementing
-              the position by one. 'Why first?', I hear you ask. Thats due to the fact that we start
-               at the index -1 and with the current character set to None, and, as you may know, 
-               the 0 character is the first element of a list or string. This is why we start with 
-               incrementing (for more info see: <a href="#Lexer:__init__()" target="_blank">🔗__init__</a>).
-        </p>
-    </div>
-    <div class="article-doc" id="Lexer:__get_id()">
-        <h2>__get_id()</h2>
-        <blockquote>
-            <pre>
-def __get_id(self):
-    id_str = ""
-
-    while self.current_char != None and self.current_char in <a href="#Lexer:line3-20" target="_blank" id="a-in-code">DIGITS</a>:
-        id_str += self.current_char
-        self.<a href="#Lexer:__advance()" id="a-in-code" target="_blank">__advance()</a>
-
-    return <a href="#Lexer:class_Token" target="_blank" id="a-in-code">Token</a>(TT_ID, str(id_str))
-            </pre>
-        </blockquote>
-        <p>
-            First a empty string is initialized. After that a while loop is entered that appends the next characters to the initialized string as long as the current character isn't the end of file and the current character is a <a href="#Lexer:line3-20" target="_blank">🔗DIGIT</a>. At the end we return the string with the token ID.
-        </p>
-    </div>
-    <div class="article-doc" id="Lexer:__get_number()">
-        <h2>__get_number()</h2>
-        <blockquote>
-            <pre>
-def __get_number(self):
-    num_str = ""
-    dot_count = 0
-
-    while self.current_char != None and self.current_char in <a href="#Lexer:line3-20" id="a-in-code">NUMBERS</a> + ".":
-        if self.current_char == ".":
-            if dot_count == 1: break
-            dot_count += 1
-            num_str += "."
-        else:
-            num_str += self.current_char
-        self.<a href="#Lexer:__advance()" id="a-in-code">__advance()</a>
-
-    if dot_count:
-        return Token(TT_FLOAT, float(num_str))
-    else:
-        return Token(TT_INT, int(num_str))
-            </pre>
-        </blockquote>
-        <p>First, a number_str is initialized kind of like in <a href="Lexer:__get_id()">🔗__get_id()</a>.
-        After that a dot_count is initialized. This is important to differanciate between ints and floats. 
-        Then a while loop is entered that goes until a character is none or if the current character isn't 
-        in <a href="#Lexer:line3-20">🔗NUMBERS</a> + a dot. If there is a dot the dot_count gets incremented 
-        by one. If the dot_count is larger than 1 we break because a float can't have more than one dot. After 
-        that we just append the current character. At the end a float is returned if there was a dot. And a int if there wasn't.</p>
-    </div>
-    <div class="article-doc" id="Lexer:__get_operand()">
-        <h2>__get_operand()</h2>
-        <blockquote>
-            <pre>
-def __get_operand(self):
-    op_str = ""
-
-    while self.current_char != None and self.current_char in OPS:
-        op_str += self.current_char
-        self.__advance()
-
-    return Token(TT_OP, op_str)
-            </pre>
-        </blockquote>
-        <p>
-            In the __get_operand() method we basically look for something like '++' or '--' or '==', 
-            etc... You get the point. this is done by appending each character that is a operand to 
-            a string as long as this character is a operand. at the end the function returns a 
-            <a href="Lexer:class_Token" target="_blank">🔗Token</a>.
-        </p>
-    </div>
-
-
-
-    <div class="dropdown-under" id="Parser">
-        <button class="dropbtn-under"><h1>◉Parser</h1></button>
-        <div class="dropdown-content-under">
-            <a href="#Parser:imports">Imports</a>
-            <a href="#Parser:instruction_set">Instruction set</a>
-        </div>
-    </div>
-
-    <div class="article-doc" id="Parser:imports">
-        <h2>Imports</h2>
-        <blockquote>
-            <pre>
-                from lexer import Token
-            </pre>
-        </blockquote>
-        <p>
-            Here the <a href="#Lexer:class_Token" target="_blank">🔗Token</a> class is imported from 
-            the <a href="#Lexer" target="_blank">◉Lexer</a>. It's not necesarry but it helps with code 
-            completion to have the class defined.
-        </p>
-    </div>
-    <div class="article-doc" id="Parser:instruction_set">
-        <h2>Instruction set</h2>
-        <blockquote>
-            <pre>
-                code should go here later, but I'm tired af.
-            </pre>
-        </blockquote>
-    </div>
-
 
     <footer>
         <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
