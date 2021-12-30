@@ -318,3 +318,11 @@ p {
     font-family: 'JetBrains Mono', monospace;
     font-style:italic;
 }
+
+.download_link {
+    background-color: #161919;
+    padding: 30px;
+    border-radius: 50px;
+    text-decoration: none;
+
+}
