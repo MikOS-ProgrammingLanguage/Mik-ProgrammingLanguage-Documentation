@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en>" style="background-color: #12232e;">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="./style/style.css">
+        <title>MIK - Learn MIK</title>
+    </head>
+    <body class="layer1">
+        <header>
+            <div class="nav">
+                <input type="checkbox">
+                  <span></span>
+                  <span></span>
+                  <div class="menu">
+                    <li><a href="../index.html">home</a></li>
+                    <li><a href="about.html">about</a></li>
+                    <li><a href="documentation.html">documentation</a></li>
+                    <li><a href="Download.html">download</a></li>
+                    <li><a id="active" href="#">learn</a></li>
+                    <li><a href="#">contact</a></li>
+                  </div>
+              </div>
+        </header>
+
+        <!--Nav-->
+        <div class="dropdown" style="display: block; padding-top: 1rem; background-color: #12232e;">
+            <button class="dropbtn" style="background-color: #161919; font-family: 'JetBrains Mono', monospace; font-size: larger; padding: 10px; border-radius: 25px;">Topics</button>
+            <div class="dropdown-content" style="border-radius: 20px; padding: 10px;">
+                <a href="#mic-basics" class="function">mic.basics()</a>
+                <a href="#mic-vars" class="function">mik.variables()</a>
+                <a href="#mik.variables.reassign" class="function">mik.variables.reassign()</a>
+                <a href="#mik.pointers" class="function">mik.pointers()</a>
+                <a href="#mik.functions" class="function">mik.functions()</a>
+                <a href="#mik.functions.assembly" class="function">mik.functions.assembly()</a>
+                <a href="#mik.structs" class="function">mik.structs()</a>
+                <a href="#mik.bool.expr" class="function">mik.bool.expr()</a>
+                <a href="#mik.loops" class="function">mik.loops()</a>
+                <a href="#mik.if" class="function">mik.if()</a>
+                <a href="#mik.elif" class="function">mik.elif()</a>
+                <a href="#mik.else" class="function">mik.else()</a>
+                <a href="#mik.bitshifting" class="function">mik.bitshifting()</a>
+                <a href="#mik.sections" class="function">mik.sections()</a>
+            </div>
+          </div>
+
+        <!--MIK basics-->
+        <div class="article-doc" id="mik-basics">
+            <h2 class="function">mik.basics()</h2>
+            <p>Mik is c-like non object oriented programming language. It gives you highlevel feautures but also low level feautures to shoot yourself in the foot. Other than in for example c, main code isn't written in a main function. Main code is written outside of functions.</p>
+        </div>
+
+        <!--Variables-->
+        <div class="article-doc" id="mic-vars">
+            <h2 class="function">mik.variables()</h2>
+            <p>In MIK variables are declared as follows:</p>
+            <blockquote>
+                <pre>
+[type] var-name = [expr with mathing type]
+[type] var-name
+[type] var-name[array length]</pre>
+            </blockquote>
+            <p>Those are all legal decleations. Be aware though as arrays can't be initialized with values. Example:</p>
+            <blockquote>
+                <pre>
+int i = 10 ✅
+str i = "Hello World" ✅
+char i = 'A' ✅
+
+int** i ✅
+char i[1] = 10 ❌</pre>
+            </blockquote>
+            <p>As you may allready made out, strings are "" while chars are ''. Keep that in mind</p>
+        </div>
+
+        <!--Variable reassignement-->
+        <div class="article-doc" id="mik.variables.reassign">
+            <h2 class="function">mik.variables.reassign()</h2>
+            <p>In MIK variable reassignement works different than in most languages. You use a special operator for reassignement (?=).</p>
+            <blockquote>
+                <pre>
+int i = 10
+i ?= 20</pre>
+            </blockquote>
+            <p>The code above assignes 10 to i and then changes i to 20</p>
+        </div>
+    
+        <!--Pointers-->
+        <div class="article-doc" id="mik.pointers">
+            <h2 class="function">mik.pointers()</h2>
+            <p>If you don't know what pointers are, pointers are just pointing to a memory address (<a href="https://en.wikipedia.org/wiki/Pointer_computer_programming" target="blank_">Wikipedia</a>). How pointers work: Use '*' to make a pointer to a address. use '&' to get the address of an object.</p>
+            <blockquote>
+                <pre>
+int test = 10
+int* i   // makes a pointer to an int named i
+i ?= &test  // i now has the address of test and therefore it's value
+*i ?= 10    // this also works. Instead of swithing the address of i, the memory address of i now has the value 10</pre>
+            </blockquote>
+            <p>Note, however, that you can use as many pointers as you want. Hence 'int***** i' is also legal. You just need the same amount of asterisks to give it a new value. '&' however can only be used once. That's because you can't really get the memmory address of a memory address.</p>
+        </div>
+
+        <!--Functions-->
+        <div class="article-doc" id="mik.functions">
+            <h2 class="function">mik.functions()</h2>
+            <p>While MIK doesn't have classes it has functions. Functions are declared as follows:</p>
+            <blockquote>
+                <pre>
+mikf name(parameters) -> ret_type {code}</pre>
+            </blockquote>
+            <p>Valid return types are:</p>
+            <ul>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">int</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">flt</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">int8-64</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">uint8-64</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">cock</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">str</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">char</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">void</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">Any custom created types</li>
+            </ul>
+            <p>An example:</p>
+            <blockquote>
+                <pre>
+mikf add(int a, int b) -> int {
+    return a + b
+}</pre>
+            </blockquote>
+            
+            <h2 class="function" id="mik.functions.assembly">mik.functions.assembly()</h2>
+            <p>MIK also has assembly functions. If you don't know what that is. It's basically a normal function but the code you write is assembly code. That allows you to do basically anything with those functions. Assembly functions are declared as follows:</p>
+            <blockquote>
+                <pre>
+mikas add(int a, int b) -> int {
+    mov rax, rdi
+    ret
+}</pre>
+            </blockquote>
+            <p>Assembly functions basically work the same as functions. The only difference being that you write assembly and that you now have low level control!</p>
+        </div>
+
+        <!--Structs and custom types-->
+        <div class="article-doc" id="mik.structs">
+            <h2 class="function">mik.structs()</h2>
+            <p>Of course as compensation for not having OOP MIK comes with structs and estructs. Structs as well as estructs are declared as follows:</p>
+            <blockquote>
+                <pre>
+struct struct_name {
+    code
+}</pre>
+            </blockquote>
+            <p>To really understand it, here is a quick example:</p>
+            <blockquote>
+                <pre>
+struct test {
+    int a
+    int b
+}</pre>
+            </blockquote>
+            <p>But with only that knowledge structs are as usefull as a void* (JK). To actually use a struct do this:</p>
+            <blockquote>
+                <pre>
+struct test i</pre>
+            </blockquote>
+            <p>You can now refference, change and use the variables like this:</p>
+            <blockquote>
+                <pre>
+i.a ?= 20
+i.b ?= 30
+int test_int = i.a</pre>
+            </blockquote>
+            <p>But One important thing. If you use 'struct test* i' you need to use '->' instead of '.' to refference the variables.</p>
+            
+            <h2 class="function">mik.estructs()</h2>
+            <p>Estructs are used exactly like normal structs. The only difference is that they behave like structs with '__attribute__((packed))' in C (<a href="https://www.keil.com/support/man/docs/armclang_ref/armclang_ref_chr1359124982232.htm" target="blank_">Recourses</a>).</p>
+            
+            <h2 class="function">mik.typedef()</h2>
+            <p>Only using structs with 'struct struct_name var_name' is tedious so MIK comes with struct typedefs. What are typedefs? Take a look:</p>
+            <blockquote>
+                <pre>
+struct test {
+    int a
+    int b
+}
+
+struct test i // this is tedious
+
+struct test typedef {
+    int a
+    int b
+}
+test i // this is how we wanna do it</pre>
+            </blockquote>
+            <p>If you still don't understand what typedefs are. They are, as the name suggests, definitions for custom types. In this case 'test' can be used as a type, like void, int, flt, str, etc.</p>
+        </div>
+
+        <!--Bool operators and conditions-->
+        <div class="article-doc" id="mik.bool.expr">
+            <h2 class="function">mik.bool.expr()</h2>
+            <p>MIK of course has bool operation. Here is a quick summary:</p>
+            <ul>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'&&' -> logic and operations</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'||' -> logic or operation</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'!' -> logic not operation</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'^' -> xor</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'b!' -> bitwise not operation</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'b&' -> bitwise and operation</li>
+                <li style="padding: 5px;font-family: 'JetBrains Mono', monospace;">'b|' -> bitwise or operation</li>
+            </ul>
+        </div>
+
+        <!--while loop (no for loop)-->
+        <div class="article-doc" id="mik.loops">
+            <h2 class="function">mik.loops()</h2>
+            <p>MIK doesn't have a for loop because every feauture of a for loop can be done with a while loop. However, we will probably add a for loop in the future</p>
+
+            <h2 class="function">mik.while()</h2>
+            <p>The while loop in MIK works like in every other programming language</p>
+            <blockquote>
+                <pre>
+while (a && b || c) {code}</pre>
+            </blockquote>
+        </div>
+
+        <!--if else, elif-->
+        <div class="article-doc">
+            <h2 class="function" id="mik.if">mik.if()</h2>
+            <p>If statements work like a while loop.</p>
+            <blockquote>
+                <pre>
+if (a && b || c) {code}</pre>
+            </blockquote>
+
+            <h2 class="function" id="mik.elif">mik.elif()</h2>
+            <p>MIK also uses elif instead of else if</p>
+            <blockquote>
+                <pre>
+elif (a && b || c) {code}</pre>
+            </blockquote>
+
+            <h2 class="function" id="mik.else">mik.else()</h2>
+            <p>MIK uses a normal else</p>
+            <blockquote>
+                <pre>
+else {code}</pre>
+            </blockquote>
+        </div>
+
+        <!--shitfing-->
+        <div class="article-doc" id="mik.bitshifting">
+            <h2 class="function">mik.bitshifting</h2>
+            <p>MIK also has bitshifts those are just '<<' and '>>' for bitshifts to the rigth and left.</p>
+        </div>
+
+        <!--Sectioning-->
+        <div class="article-doc" id="mik.sections">
+            <h2 class="function">mik.sections()</h2>
+            <p>Sectioming in MIK is a rather unique feauture that maybe sound intimidating, but it's really easy. What sectioning allows you to do is split code without using multiple files. Eg. if you have two functions, that are both complicated algorithms. You can make troubleshooting easier with section. But i guess it's best explained by example.</p>
+            <blockquote>
+                <pre>
+@section("Section name")
+mikf add(int a, int b) -> int {
+    return "Hello World"
+}
+@secend</pre>
+            </blockquote>
+            <p>This example of course throws an error. If the file is names 'test.mik', the error wouldn't tell you that you have an error in 'test.mik' but rather in 'Section name'. But the most important feauture is section ignore. It allows you to ignore a section in compilation which is way easier than commenting everything out.</p>
+        </div>
+    
+        <footer>
+            <button onclick="topFunction()" id="myBtn" title="Go to top">Top</button>
+            <script src="scripts/to_top.js"></script>
+            <p style="font-size: smaller;">©Moritz Schittenhelm</p>
+        </footer>
+    </body>
+</html>
